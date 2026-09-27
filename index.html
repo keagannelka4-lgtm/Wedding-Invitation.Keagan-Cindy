@@ -1,67 +1,2510 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#26090d" />
 
-  <title>Keagan & Cindy — Wedding Invitation</title>
+  <meta charset="UTF-8">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#22070b"
+  >
+
+  <title>
+    Keagan & Cindy — Wedding Invitation
+  </title>
+
+
+  <!-- =====================================================
+       FONTS
+  ====================================================== -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
     rel="stylesheet"
-  />
+  >
+
 
   <style>
+
+    /* =====================================================
+       ROOT
+    ====================================================== */
+
     :root {
-      --maroon: #26090d;
-      --maroon-dark: #1b0609;
-      --maroon-light: #351016;
-      --cream: #f2e8dc;
-      --muted: #c9b7ac;
-      --line: rgba(242, 232, 220, 0.2);
 
-      --serif: "Cormorant Garamond", serif;
-      --sans: "DM Sans", sans-serif;
+      --maroon:
+        #22070b;
 
-      --max-width: 1080px;
+      --maroon-dark:
+        #160407;
+
+      --maroon-light:
+        #351017;
+
+      --cream:
+        #f3e9df;
+
+      --muted:
+        #bca9a0;
+
+      --line:
+        rgba(243, 233, 223, 0.17);
+
+      --serif:
+        "Cormorant Garamond", serif;
+
+      --sans:
+        "DM Sans", sans-serif;
+
+      --max-width:
+        1100px;
+
     }
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       margin: 0;
+
       background:
         radial-gradient(
-          circle at 50% 20%,
-          rgba(112, 28, 43, 0.18),
+          circle at 50% 15%,
+          rgba(103, 25, 39, 0.18),
           transparent 40%
         ),
         var(--maroon);
 
-      color: var(--cream);
-      font-family: var(--sans);
-      overflow-x: hidden;
+      color:
+        var(--cream);
+
+      font-family:
+        var(--sans);
+
+      overflow-x:
+        hidden;
+
     }
+
 
     body.locked {
       overflow: hidden;
     }
 
+
+    img {
+      display: block;
+
+      width: 100%;
+    }
+
+
     a {
       color: inherit;
+
       text-decoration: none;
     }
 
+
+    button {
+      font-family:
+        inherit;
+    }
+
+
+    /* =====================================================
+       OPENING SCREEN
+    ====================================================== */
+
+    .opening {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+
+        radial-gradient(
+          circle at 50% 40%,
+          rgba(103, 25, 39, 0.35),
+          transparent 43%
+        ),
+
+        linear-gradient(
+          145deg,
+          #120305,
+          #29090e 55%,
+          #160407
+        );
+
+      transition:
+
+        opacity
+        1s ease,
+
+        visibility
+        1s ease;
+
+    }
+
+
+    .opening.hidden {
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .opening-inner {
+
+      width:
+        100%;
+
+      padding:
+        30px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .opening-eyebrow {
+
+      margin-bottom:
+        25px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.34em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .opening-monogram {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          80px,
+          16vw,
+          150px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.8;
+
+      letter-spacing:
+        -0.06em;
+
+    }
+
+
+    .opening-date {
+
+      margin-top:
+        28px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.32em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .open-button {
+
+      margin-top:
+        45px;
+
+      padding:
+        14px 27px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        transparent;
+
+      color:
+        var(--cream);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.22em;
+
+      text-transform:
+        uppercase;
+
+      cursor:
+        pointer;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .open-button:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       GLOBAL SECTION
+    ====================================================== */
+
+    .section {
+
+      width:
+        min(
+          var(--max-width),
+          100%
+        );
+
+      margin:
+        0 auto;
+
+      padding:
+        62px 30px;
+
+    }
+
+
+    .eyebrow {
+
+      margin-bottom:
+        12px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.3em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .section-title {
+
+      margin:
+        0;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          55px,
+          8vw,
+          90px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.85;
+
+      letter-spacing:
+        -0.04em;
+
+    }
+
+
+    /* =====================================================
+       HERO / COUPLE PHOTO
+    ====================================================== */
+
+    .hero {
+
+      position:
+        relative;
+
+      width:
+        100%;
+
+      height:
+        92vh;
+
+      min-height:
+        600px;
+
+      overflow:
+        hidden;
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        center;
+
+    }
+
+
+    .hero-image {
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        0;
+
+    }
+
+
+    .hero-image img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      object-position:
+        center;
+
+      transform:
+        scale(1.01);
+
+    }
+
+
+    /*
+      Cinematic dark treatment.
+    */
+
+    .hero-overlay {
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        1;
+
+      background:
+
+        linear-gradient(
+          to bottom,
+
+          rgba(18, 3, 5, 0.03)
+          0%,
+
+          rgba(18, 3, 5, 0.08)
+          32%,
+
+          rgba(18, 3, 5, 0.38)
+          58%,
+
+          rgba(18, 3, 5, 0.94)
+          100%
+        );
+
+    }
+
+
+    .hero-content {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      width:
+        100%;
+
+      padding:
+        40px 30px 70px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .hero-eyebrow {
+
+      color:
+        var(--cream);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.32em;
+
+      text-transform:
+        uppercase;
+
+      opacity:
+        0.9;
+
+    }
+
+
+    .hero-title {
+
+      margin:
+        20px 0 25px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          75px,
+          14vw,
+          165px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.72;
+
+      letter-spacing:
+        -0.06em;
+
+    }
+
+
+    .hero-date {
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.28em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       PERSONAL GREETING
+    ====================================================== */
+
+    .greeting {
+
+      padding-top:
+        44px;
+
+      padding-bottom:
+        52px;
+
+      text-align:
+        center;
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .greeting-name {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          42px,
+          7vw,
+          68px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        1;
+
+    }
+
+
+    .greeting-message {
+
+      max-width:
+        520px;
+
+      margin:
+        18px auto 0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    /* =====================================================
+       COUPLE
+    ====================================================== */
+
+    .couple {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .couple-heading {
+
+      margin-bottom:
+        35px;
+
+    }
+
+
+    .couple-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .person-image {
+
+      width:
+        100%;
+
+      aspect-ratio:
+        4 / 5;
+
+      overflow:
+        hidden;
+
+      background:
+        var(--maroon-light);
+
+    }
+
+
+    .person-image img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      transition:
+        transform 0.8s ease;
+
+    }
+
+
+    .person:hover
+    .person-image img {
+
+      transform:
+        scale(1.025);
+
+    }
+
+
+    .person-info {
+
+      padding-top:
+        18px;
+
+      border-top:
+        1px solid var(--line);
+
+    }
+
+
+    .person-name {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        38px;
+
+      line-height:
+        0.95;
+
+    }
+
+
+    .person-role {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.22em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       EVENTS
+    ====================================================== */
+
+    .events {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .events-heading {
+
+      margin-bottom:
+        40px;
+
+    }
+
+
+    .event-list {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .event {
+
+      padding-top:
+        18px;
+
+      border-top:
+        1px solid var(--line);
+
+    }
+
+
+    .event-number {
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.2em;
+
+    }
+
+
+    .event-title {
+
+      margin:
+        13px 0 12px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        42px;
+
+      font-weight:
+        400;
+
+      line-height:
+        0.9;
+
+    }
+
+
+    .event-date {
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.1em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .event-location {
+
+      margin:
+        13px 0 20px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .map-link {
+
+      display:
+        inline-block;
+
+      padding:
+        10px 15px;
+
+      border:
+        1px solid var(--line);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.18em;
+
+      text-transform:
+        uppercase;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .map-link:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       COUNTDOWN
+    ====================================================== */
+
+    .countdown {
+
+      text-align:
+        center;
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .countdown-heading {
+
+      margin-bottom:
+        38px;
+
+    }
+
+
+    .timer {
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      gap:
+        clamp(
+          25px,
+          7vw,
+          80px
+        );
+
+    }
+
+
+    .timer-number {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          42px,
+          6vw,
+          65px
+        );
+
+      line-height:
+        0.9;
+
+    }
+
+
+    .timer-label {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.18em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       WEDDING GIFT
+    ====================================================== */
+
+    .gift {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .gift-heading {
+
+      margin-bottom:
+        35px;
+
+    }
+
+
+    .gift-copy {
+
+      max-width:
+        580px;
+
+      margin:
+        25px 0 0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    /*
+      Two accounts side-by-side.
+    */
+
+    .gift-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .bank {
+
+      padding:
+        25px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.015
+        );
+
+    }
+
+
+    .bank-person {
+
+      margin-bottom:
+        30px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        38px;
+
+      line-height:
+        1;
+
+    }
+
+
+    .bank-label {
+
+      color:
+        var(--muted);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.2em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .bank-name {
+
+      margin-top:
+        8px;
+
+      font-size:
+        11px;
+
+      letter-spacing:
+        0.12em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .bank-number {
+
+      margin:
+        8px 0 20px;
+
+      font-size:
+        21px;
+
+      letter-spacing:
+        0.08em;
+
+    }
+
+
+    .copy-button {
+
+      padding:
+        10px 14px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        transparent;
+
+      color:
+        var(--cream);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.16em;
+
+      text-transform:
+        uppercase;
+
+      cursor:
+        pointer;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .copy-button:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       CLOSING
+    ====================================================== */
+
+    .closing {
+
+      padding-top:
+        100px;
+
+      padding-bottom:
+        120px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .closing-title {
+
+      margin:
+        20px 0 25px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          65px,
+          10vw,
+          115px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.78;
+
+      letter-spacing:
+        -0.05em;
+
+    }
+
+
+    .closing-copy {
+
+      max-width:
+        430px;
+
+      margin:
+        0 auto;
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .closing-date {
+
+      margin-top:
+        35px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.28em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       MUSIC BUTTON
+    ====================================================== */
+
+    .music-button {
+
+      position:
+        fixed;
+
+      right:
+        20px;
+
+      bottom:
+        20px;
+
+      z-index:
+        100;
+
+      width:
+        44px;
+
+      height:
+        44px;
+
+      border:
+        1px solid
+        rgba(
+          243,
+          233,
+          223,
+          0.25
+        );
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(
+          34,
+          7,
+          11,
+          0.78
+        );
+
+      color:
+        var(--cream);
+
+      cursor:
+        pointer;
+
+      backdrop-filter:
+        blur(10px);
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (
+      max-width: 700px
+    ) {
+
+
+      .section {
+
+        padding:
+          52px 20px;
+
+      }
+
+
+      .hero {
+
+        height:
+          88vh;
+
+        min-height:
+          560px;
+
+      }
+
+
+      .hero-content {
+
+        padding:
+          35px 20px 52px;
+
+      }
+
+
+      .hero-title {
+
+        font-size:
+          clamp(
+            68px,
+            19vw,
+            105px
+          );
+
+      }
+
+
+      .couple-grid,
+      .event-list,
+      .gift-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .couple-grid {
+
+        gap:
+          38px;
+
+      }
+
+
+      .event-list {
+
+        gap:
+          42px;
+
+      }
+
+
+      .gift-grid {
+
+        gap:
+          18px;
+
+      }
+
+
+      .person-name {
+
+        font-size:
+          34px;
+
+      }
+
+
+      .event-title {
+
+        font-size:
+          39px;
+
+      }
+
+
+      .bank {
+
+        padding:
+          22px;
+
+      }
+
+
+      .bank-person {
+
+        font-size:
+          34px;
+
+        margin-bottom:
+          25px;
+
+      }
+
+
+      .timer {
+
+        gap:
+          18px;
+
+      }
+
+
+      .timer-number {
+
+        font-size:
+          38px;
+
+      }
+
+
+      .timer-label {
+
+        font-size:
+          7px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body class="locked">
+
+
+  <!-- =====================================================
+       OPENING
+  ====================================================== -->
+
+  <div
+    class="opening"
+    id="opening"
+  >
+
+    <div class="opening-inner">
+
+      <div class="opening-eyebrow">
+        Wedding Invitation
+      </div>
+
+
+      <div class="opening-monogram">
+        K &amp; C
+      </div>
+
+
+      <div class="opening-date">
+        06 · 11 · 2026
+      </div>
+
+
+      <button
+        class="open-button"
+        id="openInvitation"
+      >
+        Open Invitation
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MUSIC
+  ====================================================== -->
+
+  <audio
+    id="music"
+    loop
+    preload="auto"
+  >
+
+    <source
+      src="assets/music.mp3"
+      type="audio/mpeg"
+    >
+
+  </audio>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         HERO
+         FIRST SCREEN AFTER OPENING
+    ==================================================== -->
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+
+      <div class="hero-image">
+
+        <img
+          src="assets/couple.jpg"
+          alt="Keagan and Cindy"
+        >
+
+      </div>
+
+
+      <div class="hero-overlay"></div>
+
+
+      <div class="hero-content">
+
+        <div class="hero-eyebrow">
+          Together with our families
+        </div>
+
+
+        <h1 class="hero-title">
+          Keagan<br>
+          &amp; Cindy
+        </h1>
+
+
+        <div class="hero-date">
+          06 November 2026 · Berastagi
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PERSONAL GREETING
+    ==================================================== -->
+
+    <section
+      class="section greeting"
+    >
+
+      <div class="eyebrow">
+        A personal invitation
+      </div>
+
+
+      <div
+        class="greeting-name"
+        id="guestName"
+      >
+        Dear Friends &amp; Family
+      </div>
+
+
+      <p class="greeting-message">
+
+        With great joy, we invite you to celebrate
+        the beginning of our forever.
+
+      </p>
+
+    </section>
+
+
+    <!-- ===================================================
+         GROOM & BRIDE
+    ==================================================== -->
+
+    <section
+      class="section couple"
+      id="couple"
+    >
+
+
+      <div class="couple-heading">
+
+        <div class="eyebrow">
+          The couple
+        </div>
+
+
+        <h2 class="section-title">
+          Groom &amp; Bride
+        </h2>
+
+      </div>
+
+
+      <div class="couple-grid">
+
+
+        <!-- GROOM -->
+
+        <article class="person">
+
+          <div class="person-image">
+
+            <img
+              src="assets/groom.jpg"
+              alt="Keagan Nelka Bangun"
+            >
+
+          </div>
+
+
+          <div class="person-info">
+
+            <div class="person-name">
+              Keagan Nelka Bangun
+            </div>
+
+
+            <div class="person-role">
+              The Groom
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- BRIDE -->
+
+        <article class="person">
+
+          <div class="person-image">
+
+            <img
+              src="assets/bride.jpg"
+              alt="Cindy Kita Karina Sembiring"
+            >
+
+          </div>
+
+
+          <div class="person-info">
+
+            <div class="person-name">
+              Cindy Kita Karina Sembiring
+            </div>
+
+
+            <div class="person-role">
+              The Bride
+            </div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         EVENTS
+    ==================================================== -->
+
+    <section
+      class="section events"
+      id="events"
+    >
+
+
+      <div class="events-heading">
+
+        <div class="eyebrow">
+          The celebration
+        </div>
+
+
+        <h2 class="section-title">
+          Wedding Events
+        </h2>
+
+      </div>
+
+
+      <div class="event-list">
+
+
+        <!-- EVENT 01 -->
+
+        <article class="event">
+
+          <div class="event-number">
+            01
+          </div>
+
+
+          <h3 class="event-title">
+            Holy Matrimony
+          </h3>
+
+
+          <div class="event-date">
+            Friday · 06 November 2026
+          </div>
+
+
+          <p class="event-location">
+
+            GBKP Berastagi Kota<br>
+            Berastagi, North Sumatra
+
+          </p>
+
+
+          <a
+            class="map-link"
+            href="https://www.google.com/maps/search/?api=1&query=GBKP%20Berastagi%20Kota"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Maps
+          </a>
+
+        </article>
+
+
+        <!-- EVENT 02 -->
+
+        <article class="event">
+
+          <div class="event-number">
+            02
+          </div>
+
+
+          <h3 class="event-title">
+            Traditional Celebration
+          </h3>
+
+
+          <div class="event-date">
+            Saturday · 07 November 2026
+          </div>
+
+
+          <p class="event-location">
+
+            Jambur Milalamas<br>
+            Berastagi, North Sumatra
+
+          </p>
+
+
+          <a
+            class="map-link"
+            href="https://www.google.com/maps/search/?api=1&query=Jambur%20Milalamas%20Berastagi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Maps
+          </a>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         COUNTDOWN
+    ==================================================== -->
+
+    <section
+      class="section countdown"
+      id="countdown"
+    >
+
+
+      <div class="countdown-heading">
+
+        <div class="eyebrow">
+          Until we say I do
+        </div>
+
+
+        <h2 class="section-title">
+          Counting down
+        </h2>
+
+      </div>
+
+
+      <div class="timer">
+
+
+        <div>
+
+          <div
+            class="timer-number"
+            id="days"
+          >
+            00
+          </div>
+
+          <div class="timer-label">
+            Days
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div
+            class="timer-number"
+            id="hours"
+          >
+            00
+          </div>
+
+          <div class="timer-label">
+            Hours
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div
+            class="timer-number"
+            id="minutes"
+          >
+            00
+          </div>
+
+          <div class="timer-label">
+            Minutes
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div
+            class="timer-number"
+            id="seconds"
+          >
+            00
+          </div>
+
+          <div class="timer-label">
+            Seconds
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         WEDDING GIFT
+    ==================================================== -->
+
+    <section
+      class="section gift"
+      id="gift"
+    >
+
+
+      <div class="gift-heading">
+
+        <div class="eyebrow">
+          A little something
+        </div>
+
+
+        <h2 class="section-title">
+          Wedding Gift
+        </h2>
+
+
+        <p class="gift-copy">
+
+          Your presence and prayers are already
+          more than enough. If you would like
+          to send a wedding gift, you may use
+          either of the accounts below.
+
+        </p>
+
+      </div>
+
+
+      <div class="gift-grid">
+
+
+        <!-- =================================================
+             KEAGAN ACCOUNT
+        ================================================== -->
+
+        <div class="bank">
+
+
+          <div class="bank-person">
+            Keagan
+          </div>
+
+
+          <div class="bank-label">
+            Bank Account
+          </div>
+
+
+          <div class="bank-name">
+            BCA
+          </div>
+
+
+          <!-- CHANGE ACCOUNT NUMBER -->
+
+          <div
+            class="bank-number"
+          >
+            0000000000
+          </div>
+
+
+          <button
+            class="copy-button"
+            data-copy="0000000000"
+          >
+            Copy Account Number
+          </button>
+
+
+        </div>
+
+
+        <!-- =================================================
+             CINDY ACCOUNT
+        ================================================== -->
+
+        <div class="bank">
+
+
+          <div class="bank-person">
+            Cindy
+          </div>
+
+
+          <div class="bank-label">
+            Bank Account
+          </div>
+
+
+          <div class="bank-name">
+            BCA
+          </div>
+
+
+          <!-- CHANGE ACCOUNT NUMBER -->
+
+          <div
+            class="bank-number"
+          >
+            0000000000
+          </div>
+
+
+          <button
+            class="copy-button"
+            data-copy="0000000000"
+          >
+            Copy Account Number
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CLOSING
+    ==================================================== -->
+
+    <section
+      class="section closing"
+    >
+
+
+      <div class="eyebrow">
+        Thank you
+      </div>
+
+
+      <h2 class="closing-title">
+
+        See you<br>
+        at the wedding.
+
+      </h2>
+
+
+      <p class="closing-copy">
+
+        We would be honored to have you
+        celebrate this day with us.
+
+      </p>
+
+
+      <div class="closing-date">
+
+        Keagan &amp; Cindy · 06 November 2026
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       MUSIC CONTROL
+  ====================================================== -->
+
+  <button
+    class="music-button"
+    id="musicToggle"
+    aria-label="Toggle music"
+  >
+    ♫
+  </button>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+
+    /* =====================================================
+       PERSONALIZED GUESTS
+    ======================================================
+
+       Example:
+
+       yourwebsite.com/?guest=johan-marta
+
+       yourwebsite.com/?guest=sembiring
+
+       Add as many guests as you want.
+    ====================================================== */
+
+
+    const guests = {
+
+      "sembiring":
+        "Mr. & Mrs. Sembiring",
+
+      "johan-marta":
+        "Uncle Johan & Auntie Marta",
+
+      "friends":
+        "Our Dear Friends",
+
+      "family":
+        "Our Dear Family"
+
+    };
+
+
+    const urlParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const guestKey =
+      urlParams.get("guest");
+
+
+    const guestName =
+      document.getElementById(
+        "guestName"
+      );
+
+
+    if (
+      guestKey &&
+      guests[guestKey]
+    ) {
+
+      guestName.textContent =
+        "Dear " + guests[guestKey];
+
+    }
+
+
+    /* =====================================================
+       OPEN INVITATION
+    ====================================================== */
+
+
+    const opening =
+      document.getElementById(
+        "opening"
+      );
+
+
+    const openButton =
+      document.getElementById(
+        "openInvitation"
+      );
+
+
+    const music =
+      document.getElementById(
+        "music"
+      );
+
+
+    const musicToggle =
+      document.getElementById(
+        "musicToggle"
+      );
+
+
+    let musicPlaying =
+      false;
+
+
+    openButton.addEventListener(
+      "click",
+      async function () {
+
+
+        opening.classList.add(
+          "hidden"
+        );
+
+
+        document.body.classList.remove(
+          "locked"
+        );
+
+
+        /*
+          Music starts after the guest
+          actively clicks the invitation.
+        */
+
+        try {
+
+          await music.play();
+
+          musicPlaying =
+            true;
+
+          musicToggle.textContent =
+            "Ⅱ";
+
+        }
+
+        catch (error) {
+
+          console.log(
+            "Music could not start:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       MUSIC TOGGLE
+    ====================================================== */
+
+
+    musicToggle.addEventListener(
+      "click",
+      async function () {
+
+
+        if (
+          musicPlaying
+        ) {
+
+          music.pause();
+
+          musicPlaying =
+            false;
+
+          musicToggle.textContent =
+            "♫";
+
+        }
+
+        else {
+
+          try {
+
+            await music.play();
+
+            musicPlaying =
+              true;
+
+            musicToggle.textContent =
+              "Ⅱ";
+
+          }
+
+          catch (error) {
+
+            console.log(
+              "Music could not start:",
+              error
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       COUNTDOWN
+    ======================================================
+
+       Current countdown:
+
+       06 November 2026
+       10:00 AM
+       WIB / UTC+7
+
+       Change the time below when
+       the ceremony time is finalized.
+    ====================================================== */
+
+
+    const weddingDate =
+      new Date(
+        "2026-11-06T10:00:00+07:00"
+      ).getTime();
+
+
+    function updateCountdown() {
+
+
+      const now =
+        Date.now();
+
+
+      const difference =
+        weddingDate - now;
+
+
+      if (
+        difference <= 0
+      ) {
+
+        document.getElementById(
+          "days"
+        ).textContent = "00";
+
+
+        document.getElementById(
+          "hours"
+        ).textContent = "00";
+
+
+        document.getElementById(
+          "minutes"
+        ).textContent = "00";
+
+
+        document.getElementById(
+          "seconds"
+        ).textContent = "00";
+
+
+        return;
+
+      }
+
+
+      const days =
+        Math.floor(
+          difference /
+          (
+            1000 *
+            60 *
+            60 *
+            24
+          )
+        );
+
+
+      const hours =
+        Math.floor(
+          difference /
+          (
+            1000 *
+            60 *
+            60
+          )
+        ) % 24;
+
+
+      const minutes =
+        Math.floor(
+          difference /
+          (
+            1000 *
+            60
+          )
+        ) % 60;
+
+
+      const seconds =
+        Math.floor(
+          difference /
+          1000
+        ) % 60;
+
+
+      document.getElementById(
+        "days"
+      ).textContent =
+        String(days).padStart(
+          2,
+          "0"
+        );
+
+
+      document.getElementById(
+        "hours"
+      ).textContent =
+        String(hours).padStart(
+          2,
+          "0"
+        );
+
+
+      document.getElementById(
+        "minutes"
+      ).textContent =
+        String(minutes).padStart(
+          2,
+          "0"
+        );
+
+
+      document.getElementById(
+        "seconds"
+      ).textContent =
+        String(seconds).padStart(
+          2,
+          "0"
+        );
+
+    }
+
+
+    updateCountdown();
+
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+
+    /* =====================================================
+       COPY BANK ACCOUNT
+    ====================================================== */
+
+
+    const copyButtons =
+      document.querySelectorAll(
+        ".copy-button"
+      );
+
+
+    copyButtons.forEach(
+      function (button) {
+
+
+        button.addEventListener(
+          "click",
+          async function () {
+
+
+            const accountNumber =
+              button.dataset.copy;
+
+
+            try {
+
+              await navigator.clipboard.writeText(
+                accountNumber
+              );
+
+
+              const originalText =
+                button.textContent;
+
+
+              button.textContent =
+                "Copied";
+
+
+              setTimeout(
+                function () {
+
+                  button.textContent =
+                    originalText;
+
+                },
+                1400
+              );
+
+            }
+
+            catch (error) {
+
+              console.log(
+                "Could not copy:",
+                error
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>
     button {
       font: inherit;
     }
