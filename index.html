@@ -744,6 +744,15 @@
       line-height:
         0.95;
 
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
     }
 
 
@@ -2156,6 +2165,121 @@
         "Dear " + guests[guestKey];
 
     }
+
+
+    /* =====================================================
+       FIT PERSON NAMES TO ONE LINE
+    ======================================================
+
+       Shrinks each .person-name (groom/bride) so the
+       full name always fits on a single line, no matter
+       how long the name/title is or how wide the screen
+       is.
+    ====================================================== */
+
+
+    function fitPersonNames() {
+
+
+      document.querySelectorAll(
+        ".person-name"
+      ).forEach(
+        function (el) {
+
+
+          const minFontSize = 15;
+
+
+          /*
+            Reset any previous inline
+            override so we re-measure
+            against the CSS/media-query
+            size for the current screen
+            width, not a stale shrunk
+            value from before a resize.
+          */
+
+          el.style.fontSize =
+            "";
+
+
+          const maxFontSize =
+            parseFloat(
+              window.getComputedStyle(
+                el
+              ).fontSize
+            );
+
+
+          let fontSize =
+            maxFontSize;
+
+
+          el.style.fontSize =
+            fontSize + "px";
+
+
+          while (
+            el.scrollWidth > el.clientWidth &&
+            fontSize > minFontSize
+          ) {
+
+            fontSize -= 1;
+
+            el.style.fontSize =
+              fontSize + "px";
+
+          }
+
+        }
+      );
+
+    }
+
+
+    if (
+      document.fonts &&
+      document.fonts.ready
+    ) {
+
+      document.fonts.ready.then(
+        fitPersonNames
+      );
+
+    }
+
+    else {
+
+      fitPersonNames();
+
+    }
+
+
+    window.addEventListener(
+      "load",
+      fitPersonNames
+    );
+
+
+    let fitNamesResizeTimer;
+
+
+    window.addEventListener(
+      "resize",
+      function () {
+
+        clearTimeout(
+          fitNamesResizeTimer
+        );
+
+        fitNamesResizeTimer =
+          setTimeout(
+            fitPersonNames,
+            120
+          );
+
+      }
+    );
 
 
     /* =====================================================
