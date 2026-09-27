@@ -41,10 +41,1471 @@
   >
 
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <style>
+/* =====================================================
+       ROOT
+    ====================================================== */
+
+    :root {
+
+      --maroon:
+        #22070b;
+
+      --maroon-dark:
+        #160407;
+
+      --maroon-light:
+        #351017;
+
+      --cream:
+        #f3e9df;
+
+      --muted:
+        #bca9a0;
+
+      --line:
+        rgba(243, 233, 223, 0.17);
+
+      --serif:
+        "Cormorant Garamond", serif;
+
+      --sans:
+        "DM Sans", sans-serif;
+
+      --max-width:
+        1100px;
+
+      box-sizing:
+        border-box;
+
+    }
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+
+      scroll-behavior:
+        smooth;
+
+      scroll-padding-top:
+        env(safe-area-inset-top, 0px);
+
+    }
+
+
+    body {
+
+      margin: 0;
+
+      background:
+        radial-gradient(
+          circle at 50% 15%,
+          rgba(103, 25, 39, 0.18),
+          transparent 40%
+        ),
+        var(--maroon);
+
+      color:
+        var(--cream);
+
+      font-family:
+        var(--sans);
+
+      overflow-x:
+        hidden;
+
+    }
+
+
+    body.locked {
+      overflow: hidden;
+    }
+
+
+    img {
+      display: block;
+
+      width: 100%;
+    }
+
+
+    a {
+      color: inherit;
+
+      text-decoration: none;
+    }
+
+
+    button {
+      font-family:
+        inherit;
+    }
+
+
+    /* =====================================================
+       OPENING SCREEN
+    ====================================================== */
+
+    .opening {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      overflow-y:
+        auto;
+
+      padding:
+        env(safe-area-inset-top, 0px)
+        env(safe-area-inset-right, 0px)
+        env(safe-area-inset-bottom, 0px)
+        env(safe-area-inset-left, 0px);
+
+      background:
+
+        radial-gradient(
+          circle at 50% 40%,
+          rgba(103, 25, 39, 0.35),
+          transparent 43%
+        ),
+
+        linear-gradient(
+          145deg,
+          #120305,
+          #29090e 55%,
+          #160407
+        );
+
+      transition:
+
+        opacity
+        1s ease,
+
+        visibility
+        1s ease;
+
+    }
+
+
+    .opening.hidden {
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .opening-inner {
+
+      width:
+        100%;
+
+      padding:
+        30px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .opening-eyebrow {
+
+      margin-bottom:
+        25px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.34em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .opening-monogram {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          80px,
+          16vw,
+          150px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.8;
+
+      letter-spacing:
+        -0.06em;
+
+    }
+
+
+    .opening-date {
+
+      margin-top:
+        28px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.32em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .open-button {
+
+      margin-top:
+        45px;
+
+      padding:
+        14px 27px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        transparent;
+
+      color:
+        var(--cream);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.22em;
+
+      text-transform:
+        uppercase;
+
+      cursor:
+        pointer;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .open-button:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       GLOBAL SECTION
+    ====================================================== */
+
+    .section {
+
+      width:
+        min(
+          var(--max-width),
+          100%
+        );
+
+      margin:
+        0 auto;
+
+      padding:
+        62px 30px;
+
+    }
+
+
+    .eyebrow {
+
+      margin-bottom:
+        12px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.3em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .section-title {
+
+      margin:
+        0;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          55px,
+          8vw,
+          90px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.85;
+
+      letter-spacing:
+        -0.04em;
+
+    }
+
+
+    /* =====================================================
+       HERO / COUPLE PHOTO
+    ====================================================== */
+
+    .hero {
+
+      position:
+        relative;
+
+      width:
+        100%;
+
+      height:
+        92vh;
+
+      height:
+        92dvh;
+
+      min-height:
+        560px;
+
+      overflow:
+        hidden;
+
+      display:
+        flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        center;
+
+    }
+
+
+    .hero-image {
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        0;
+
+      background:
+        var(--maroon-light);
+
+    }
+
+
+    .hero-image img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      object-position:
+        center;
+
+      transform:
+        scale(1.01);
+
+    }
+
+
+    /*
+      Cinematic dark treatment.
+    */
+
+    .hero-overlay {
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        1;
+
+      background:
+
+        linear-gradient(
+          to bottom,
+
+          rgba(18, 3, 5, 0.03)
+          0%,
+
+          rgba(18, 3, 5, 0.08)
+          32%,
+
+          rgba(18, 3, 5, 0.38)
+          58%,
+
+          rgba(18, 3, 5, 0.94)
+          100%
+        );
+
+    }
+
+
+    .hero-content {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      width:
+        100%;
+
+      padding:
+        40px 30px
+        calc(70px + env(safe-area-inset-bottom, 0px));
+
+      text-align:
+        center;
+
+    }
+
+
+    .hero-eyebrow {
+
+      color:
+        var(--cream);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.32em;
+
+      text-transform:
+        uppercase;
+
+      opacity:
+        0.9;
+
+    }
+
+
+    .hero-title {
+
+      margin:
+        20px 0 25px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          40px,
+          9vw,
+          125px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        1;
+
+      letter-spacing:
+        -0.03em;
+
+      white-space:
+        nowrap;
+
+    }
+
+
+    .hero-date {
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.28em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       PERSONAL GREETING
+    ====================================================== */
+
+    .greeting {
+
+      padding-top:
+        44px;
+
+      padding-bottom:
+        52px;
+
+      text-align:
+        center;
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .greeting-name {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          42px,
+          7vw,
+          68px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        1;
+
+    }
+
+
+    .greeting-message {
+
+      max-width:
+        520px;
+
+      margin:
+        18px auto 0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    /* =====================================================
+       COUPLE
+    ====================================================== */
+
+    .couple {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .couple-heading {
+
+      margin-bottom:
+        35px;
+
+    }
+
+
+    .couple-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .person-image {
+
+      width:
+        100%;
+
+      aspect-ratio:
+        4 / 5;
+
+      overflow:
+        hidden;
+
+      background:
+        var(--maroon-light);
+
+    }
+
+
+    .person-image img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      transition:
+        transform 0.8s ease;
+
+    }
+
+
+    .person:hover
+    .person-image img {
+
+      transform:
+        scale(1.025);
+
+    }
+
+
+    .person-info {
+
+      padding-top:
+        18px;
+
+      border-top:
+        1px solid var(--line);
+
+    }
+
+
+    .person-name {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        38px;
+
+      line-height:
+        0.95;
+
+      white-space:
+        nowrap;
+
+      overflow:
+        hidden;
+
+      text-overflow:
+        ellipsis;
+
+    }
+
+
+    .person-role {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.22em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       EVENTS
+    ====================================================== */
+
+    .events {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .events-heading {
+
+      margin-bottom:
+        40px;
+
+    }
+
+
+    .event-list {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .event {
+
+      padding-top:
+        18px;
+
+      border-top:
+        1px solid var(--line);
+
+    }
+
+
+    .event-number {
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.2em;
+
+    }
+
+
+    .event-title {
+
+      margin:
+        13px 0 12px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        42px;
+
+      font-weight:
+        400;
+
+      line-height:
+        0.9;
+
+    }
+
+
+    .event-date {
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        0.1em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .event-location {
+
+      margin:
+        13px 0 20px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .map-link {
+
+      display:
+        inline-block;
+
+      padding:
+        10px 15px;
+
+      border:
+        1px solid var(--line);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.18em;
+
+      text-transform:
+        uppercase;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .map-link:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       COUNTDOWN
+    ====================================================== */
+
+    .countdown {
+
+      text-align:
+        center;
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .countdown-heading {
+
+      margin-bottom:
+        38px;
+
+    }
+
+
+    .timer {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      justify-content:
+        center;
+
+      row-gap:
+        20px;
+
+      gap:
+        clamp(
+          25px,
+          7vw,
+          80px
+        );
+
+    }
+
+
+    .timer-number {
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          42px,
+          6vw,
+          65px
+        );
+
+      line-height:
+        0.9;
+
+    }
+
+
+    .timer-label {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.18em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       WEDDING GIFT
+    ====================================================== */
+
+    .gift {
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .gift-heading {
+
+      margin-bottom:
+        35px;
+
+    }
+
+
+    .gift-copy {
+
+      max-width:
+        580px;
+
+      margin:
+        25px 0 0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    /*
+      Two accounts side-by-side.
+    */
+
+    .gift-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        24px;
+
+    }
+
+
+    .bank {
+
+      padding:
+        25px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.015
+        );
+
+    }
+
+
+    .bank-person {
+
+      margin-bottom:
+        30px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        38px;
+
+      line-height:
+        1;
+
+    }
+
+
+    .bank-label {
+
+      color:
+        var(--muted);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.2em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .bank-name {
+
+      margin-top:
+        8px;
+
+      font-size:
+        11px;
+
+      letter-spacing:
+        0.12em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .bank-number {
+
+      margin:
+        8px 0 20px;
+
+      font-size:
+        21px;
+
+      letter-spacing:
+        0.08em;
+
+    }
+
+
+    .copy-button {
+
+      padding:
+        10px 14px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        transparent;
+
+      color:
+        var(--cream);
+
+      font-size:
+        8px;
+
+      letter-spacing:
+        0.16em;
+
+      text-transform:
+        uppercase;
+
+      cursor:
+        pointer;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+
+    }
+
+
+    .copy-button:hover {
+
+      background:
+        var(--cream);
+
+      color:
+        var(--maroon);
+
+    }
+
+
+    /* =====================================================
+       CLOSING
+    ====================================================== */
+
+    .closing {
+
+      padding-top:
+        100px;
+
+      padding-bottom:
+        120px;
+
+      text-align:
+        center;
+
+    }
+
+
+    .closing-title {
+
+      margin:
+        20px 0 25px;
+
+      font-family:
+        var(--serif);
+
+      font-size:
+        clamp(
+          65px,
+          10vw,
+          115px
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.78;
+
+      letter-spacing:
+        -0.05em;
+
+    }
+
+
+    .closing-copy {
+
+      max-width:
+        430px;
+
+      margin:
+        0 auto;
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .closing-date {
+
+      margin-top:
+        35px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      letter-spacing:
+        0.28em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    /* =====================================================
+       MUSIC BUTTON
+    ====================================================== */
+
+    .music-button {
+
+      position:
+        fixed;
+
+      right:
+        calc(20px + env(safe-area-inset-right, 0px));
+
+      bottom:
+        calc(20px + env(safe-area-inset-bottom, 0px));
+
+      z-index:
+        100;
+
+      width:
+        44px;
+
+      height:
+        44px;
+
+      border:
+        1px solid
+        rgba(
+          243,
+          233,
+          223,
+          0.25
+        );
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(
+          34,
+          7,
+          11,
+          0.78
+        );
+
+      color:
+        var(--cream);
+
+      cursor:
+        pointer;
+
+      backdrop-filter:
+        blur(10px);
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (
+      max-width: 700px
+    ) {
+
+
+      .section {
+
+        padding:
+          52px 20px;
+
+      }
+
+
+      .hero {
+
+        height:
+          88vh;
+
+        height:
+          88dvh;
+
+        min-height:
+          520px;
+
+      }
+
+
+      .hero-content {
+
+        padding:
+          35px 20px
+          calc(52px + env(safe-area-inset-bottom, 0px));
+
+      }
+
+
+      .hero-title {
+
+        font-size:
+          clamp(
+            26px,
+            11vw,
+            46px
+          );
+
+      }
+
+
+      .couple-grid,
+      .event-list,
+      .gift-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .couple-grid {
+
+        gap:
+          38px;
+
+      }
+
+
+      .event-list {
+
+        gap:
+          42px;
+
+      }
+
+
+      .gift-grid {
+
+        gap:
+          18px;
+
+      }
+
+
+      .person-name {
+
+        font-size:
+          34px;
+
+      }
+
+
+      .event-title {
+
+        font-size:
+          39px;
+
+      }
+
+
+      .bank {
+
+        padding:
+          22px;
+
+      }
+
+
+      .bank-person {
+
+        font-size:
+          34px;
+
+        margin-bottom:
+          25px;
+
+      }
+
+
+      .timer {
+
+        gap:
+          18px;
+
+      }
+
+
+      .timer-number {
+
+        font-size:
+          38px;
+
+      }
+
+
+      .timer-label {
+
+        font-size:
+          7px;
+
+      }
+
+    }
+  </style>
 
 </head>
 
