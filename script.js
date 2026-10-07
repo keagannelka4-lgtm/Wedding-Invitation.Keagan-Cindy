@@ -118,3 +118,372 @@ document.querySelectorAll(".photo img").forEach(function (img) {
     img.addEventListener("error", function () { markMissing(img); });
   }
 });
+
+/* =========================================================
+   WEDDING WISHES — Supabase
+   ========================================================= */
+
+var SUPABASE_URL = "https://wguwukhanzcajrdarqnl.supabase.co";
+var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kVVr3bvLPNGc7nLnsLb7aQ_JI749noW";
+
+function loadSupabase() {
+  return new Promise(function (resolve, reject) {
+    if (window.supabase && window.supabase.createClient) {
+      resolve(window.supabase);
+      return;
+    }
+
+    var script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+    script.async = true;
+
+    script.onload = function () {
+      if (window.supabase && window.supabase.createClient) {
+        resolve(window.supabase);
+      } else {
+        reject(new Error("Supabase library unavailable."));
+      }
+    };
+
+    script.onerror = function () {
+      reject(new Error("Could not load Supabase."));
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
+function escapeHTML(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatWishDate(dateString) {
+  var date = new Date(dateString);
+
+  if (isNaN(date.getTime())) return "";
+
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+function createGuestbook() {
+  var countdown = document.querySelector(".countdown");
+
+  if (!countdown) return null;
+
+  var section = document.createElement("section");
+
+  section.id = "weddingWishes";
+  section.className = "wrap rule wedding-wishes";
+
+  section.innerHTML = `
+    <div class="eyebrow">A few words to keep</div>
+
+    <h2 class="title">Wedding Wishes</h2>
+
+    <p class="wishes-copy">
+      Leave a little message for us. Your words will stay with us long after the day is over.
+    </p>
+
+    <form id="wishForm" class="wish-form" novalidate>
+
+      <label class="wish-field">
+        <span class="wish-label">Your Name</span>
+
+        <input
+          id="wishName"
+          type="text"
+          maxlength="80"
+          autocomplete="name"
+          placeholder="Your name"
+          required
+        >
+      </label>
+
+      <label class="wish-field">
+        <span class="wish-label">Your Wishes</span>
+
+        <textarea
+          id="wishMessage"
+          maxlength="500"
+          rows="4"
+          placeholder="Write something for Keagan & Cindy..."
+          required
+        ></textarea>
+      </label>
+
+      <button
+        id="wishSubmit"
+        class="wish-submit"
+        type="submit"
+      >
+        Send Wishes
+      </button>
+
+      <div
+        id="wishStatus"
+        class="wish-status"
+        aria-live="polite"
+      ></div>
+
+    </form>
+
+    <div
+      id="wishList"
+      class="wish-list"
+      aria-live="polite"
+    ></div>
+  `;
+
+  countdown.insertAdjacentElement("afterend", section);
+
+  return section;
+}
+
+function renderWishes(list, wishes) {
+  if (!wishes.length) {
+    list.innerHTML =
+      '<div class="wishes-empty">Be the first to leave a wish.</div>';
+
+    return;
+  }
+
+  list.innerHTML = wishes.map(function (wish) {
+    return `
+      <article class="wish-card">
+
+        <div class="wish-card-head">
+
+          <div class="wish-name">
+            ${escapeHTML(wish.name)}
+          </div>
+
+          <div class="wish-date">
+            ${escapeHTML(formatWishDate(wish.created_at))}
+          </div>
+
+        </div>
+
+        <div class="wish-message">
+          ${escapeHTML(wish.message).replace(/\n/g, "<br>")}
+        </div>
+
+      </article>
+    `;
+  }).join("");
+}
+
+function initWeddingWishes() {
+  var section = createGuestbook();
+
+  if (!section) return;
+
+  var form = document.getElementById("wishForm");
+  var nameInput = document.getElementById("wishName");
+  var messageInput = document.getElementById("wishMessage");
+  var submitButton = document.getElementById("wishSubmit");
+  var status = document.getElementById("wishStatus");
+  var list = document.getElementById("wishList");
+
+  var wishes = [];
+
+  function showStatus(message, type) {
+    status.textContent = message || "";
+    status.className = "wish-status" + (type ? " " + type : "");
+  }
+
+  function sortWishes() {
+    wishes.sort(function (a, b) {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+  }
+
+  function addWish(wish) {
+    var exists = wishes.some(function (item) {
+      return String(item.id) === String(wish.id);
+    });
+
+    if (!exists) {
+      wishes.push(wish);
+    }
+
+    sortWishes();
+
+    renderWishes(list, wishes);
+  }
+
+  loadSupabase()
+    .then(function (supabase) {
+
+      var client = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+      return client
+        .from("wedding_wishes")
+        .select("id, name, message, created_at")
+        .order("created_at", {
+          ascending: false
+        })
+        .limit(100)
+
+        .then(function (result) {
+
+          if (result.error) {
+            throw result.error;
+          }
+
+          wishes = result.data || [];
+
+          renderWishes(list, wishes);
+
+          client
+            .channel("wedding-wishes-live")
+
+            .on(
+              "postgres_changes",
+              {
+                event: "INSERT",
+                schema: "public",
+                table: "wedding_wishes"
+              },
+
+              function (payload) {
+                addWish(payload.new);
+              }
+            )
+
+            .subscribe();
+        });
+    })
+
+    .catch(function (error) {
+
+      console.error(
+        "Wedding wishes failed:",
+        error
+      );
+
+      list.innerHTML =
+        '<div class="wishes-empty">Wishes are temporarily unavailable.</div>';
+    });
+
+
+  form.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    var name = nameInput.value.trim();
+    var message = messageInput.value.trim();
+
+    if (!name || !message) {
+
+      showStatus(
+        "Please enter your name and a message.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (name.length > 80 || message.length > 500) {
+
+      showStatus(
+        "Your name or message is too long.",
+        "error"
+      );
+
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+
+    showStatus("", "");
+
+    loadSupabase()
+
+      .then(function (supabase) {
+
+        var client = supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLISHABLE_KEY
+        );
+
+        return client
+
+          .from("wedding_wishes")
+
+          .insert({
+            name: name,
+            message: message
+          })
+
+          .select(
+            "id, name, message, created_at"
+          )
+
+          .single();
+      })
+
+      .then(function (result) {
+
+        if (result.error) {
+          throw result.error;
+        }
+
+        addWish(result.data);
+
+        form.reset();
+
+        showStatus(
+          "Your wishes have been sent. Thank you. ♡",
+          "success"
+        );
+      })
+
+      .catch(function (error) {
+
+        console.error(
+          "Wedding wish submission failed:",
+          error
+        );
+
+        showStatus(
+          "Something went wrong. Please try again.",
+          "error"
+        );
+      })
+
+      .finally(function () {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Send Wishes";
+      });
+  });
+}
+
+
+if (document.readyState === "loading") {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initWeddingWishes
+  );
+
+} else {
+
+  initWeddingWishes();
+
+}
