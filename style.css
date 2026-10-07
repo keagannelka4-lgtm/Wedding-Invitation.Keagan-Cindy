@@ -123,3 +123,175 @@ h2.title{margin:0; font-family:var(--serif); font-weight:400; line-height:.9; le
   .gift-grid{grid-template-columns:1fr 1fr;}
   .couple-grid{grid-template-columns:1fr 1fr; gap:18px;}
 }
+
+/* =========================================================
+   WEDDING WISHES
+   ========================================================= */
+
+.wedding-wishes .wishes-copy {
+  max-width: 480px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.wish-form {
+  margin-top: 30px;
+}
+
+.wish-field {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.wish-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.wish-field input,
+.wish-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  outline: none;
+  background: rgba(255,255,255,.015);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 14px 15px;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.wish-field textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.wish-field input::placeholder,
+.wish-field textarea::placeholder {
+  color: rgba(188,169,160,.62);
+}
+
+.wish-field input:focus,
+.wish-field textarea:focus {
+  border-color: rgba(243,233,223,.4);
+  background: rgba(255,255,255,.025);
+}
+
+.wish-submit {
+  width: 100%;
+  margin-top: 2px;
+  padding: 14px 18px;
+  border: 1px solid var(--cream);
+  border-radius: 0;
+  background: var(--cream);
+  color: var(--maroon);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.wish-submit:hover {
+  opacity: .9;
+}
+
+.wish-submit:active {
+  transform: translateY(1px);
+}
+
+.wish-submit:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+.wish-status {
+  min-height: 18px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.wish-status.success {
+  color: var(--cream);
+}
+
+.wish-status.error {
+  color: #d9aaa5;
+}
+
+.wish-list {
+  margin-top: 34px;
+  display: grid;
+  gap: 12px;
+}
+
+.wish-card {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.wish-card:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.wish-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.wish-name {
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1;
+}
+
+.wish-date {
+  flex: none;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.wish-message {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.wishes-empty {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 420px) {
+  .wish-card-head {
+    display: block;
+  }
+
+  .wish-date {
+    display: block;
+    margin-top: 6px;
+  }
+}
